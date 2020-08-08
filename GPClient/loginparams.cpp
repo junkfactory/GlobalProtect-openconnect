@@ -15,7 +15,7 @@ LoginParams::LoginParams()
     params.addQueryItem("direct", "yes");
     params.addQueryItem("clientVer", "4100");
     params.addQueryItem("os-version", QUrl::toPercentEncoding(QSysInfo::prettyProductName()));
-    params.addQueryItem("clientos", "Mac");
+    params.addQueryItem("clientos", "darwin");
     params.addQueryItem("portal-userauthcookie", "");
     params.addQueryItem("portal-prelogonuserauthcookie", "");
     params.addQueryItem("prelogin-cookie", "");
