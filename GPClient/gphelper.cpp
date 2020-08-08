@@ -5,6 +5,8 @@
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QWidget>
+#include <QSslConfiguration>
+#include <QSslSocket>
 #include <plog/Log.h>
 
 QNetworkAccessManager* gpclient::helper::networkManager = new QNetworkAccessManager;
@@ -12,6 +14,12 @@ QNetworkAccessManager* gpclient::helper::networkManager = new QNetworkAccessMana
 QNetworkReply* gpclient::helper::createRequest(QString url, QByteArray params)
 {
     QNetworkRequest request(url);
+
+    // Skip the ssl verifying
+    QSslConfiguration conf = request.sslConfiguration();
+    conf.setPeerVerifyMode(QSslSocket::VerifyNone);
+    request.setSslConfiguration(conf);
+
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
     request.setHeader(QNetworkRequest::UserAgentHeader, UA);
 
@@ -40,6 +48,7 @@ GPGateway gpclient::helper::filterPreferredGateway(QList<GPGateway> gateways, co
 QUrlQuery gpclient::helper::parseGatewayResponse(const QByteArray &xml)
 {
     PLOGI << "Start parsing the gateway response...";
+    PLOGI << "The gateway response is: " << xml;
 
     QXmlStreamReader xmlReader{xml};
     QList<QString> args;
