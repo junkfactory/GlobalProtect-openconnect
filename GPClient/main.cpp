@@ -6,7 +6,7 @@
 #include <plog/Log.h>
 #include <plog/Appenders/ColorConsoleAppender.h>
 
-static const QString version = "v1.2.5";
+static const QString version = "v1.2.7";
 
 int main(int argc, char *argv[])
 {
@@ -28,10 +28,12 @@ int main(int argc, char *argv[])
     }
 
     SingleApplication app(argc, argv);
+    app.setQuitOnLastWindowClosed(false);
+
     GPClient w;
     w.show();
 
-    QObject::connect(&app, &SingleApplication::instanceStarted, &w, &GPClient::activiate);
+    QObject::connect(&app, &SingleApplication::instanceStarted, &w, &GPClient::activate);
 
     return app.exec();
 }
