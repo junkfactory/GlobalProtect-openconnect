@@ -1,5 +1,6 @@
 #ifndef LOGINPARAMS_H
 #define LOGINPARAMS_H
+#define CLIENT_OS_DARWIN "Mac"
 
 #include <QUrlQuery>
 
